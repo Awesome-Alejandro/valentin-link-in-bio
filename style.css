@@ -1,66 +1,128 @@
-/* P1 Technical Setup: Setting the Neon Green Color */
 :root {
-    --neon-green: #39FF14; /* Limish Green accent color */
-    --background: #000000;
-    --text-color: #FFFFFF;
+    /* Define the core brand accent color (Lime Green) */
+    --accent-lime: #aaff00;
+    
+    /* Variables for the Industrial/Metallic Gradient Background */
+    --dark-bg: #0d0d0d;       /* Near Black */
+    --mid-grey: #242424;      /* Dark Metal Grey */
+    --light-silver: #4d4d4d;  /* Brushed Silver Highlight */
+    --light-text: #f0f0f0; 
 }
 
-/* Base Styles: Mobile First */
+/* --- 1. Global Industrial/Techno Base (Black/Grey/Silver Gradient) --- */
 body {
-    background-color: var(--background);
-    color: var(--text-color);
-    font-family: Arial, sans-serif;
+    /* Linear Gradient: Vertical transition for industrial/metallic look */
+    background: linear-gradient(180deg, var(--dark-bg) 0%, var(--mid-grey) 45%, var(--light-silver) 75%, var(--dark-bg) 100%);
+    
+    /* Ensures the gradient is fixed and covers the entire screen */
+    background-color: var(--dark-bg);
+    background-attachment: fixed; 
+
+    color: var(--light-text);
+    /* Font for the techno/industrial feel */
+    font-family: 'Roboto Mono', 'Courier New', monospace; 
     margin: 0;
+    padding: 0;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+}
+
+/* Center the main link container */
+.container {
+    width: 90%;
+    max-width: 500px; /* Standard link-in-bio width */
+    padding: 20px;
+    text-align: center;
+    /* Optional: Slight dark box around the content area */
+    background-color: rgba(0, 0, 0, 0.4); 
+    border-radius: 8px;
+    border: 1px solid rgba(170, 255, 0, 0.2); /* Thin lime border */
+    z-index: 10; /* Ensures container is above the gradient background */
+}
+
+/* --- 2. Spinning Oval Logo (3D Rotation) --- */
+#logo-container {
+    /* Dimensions to create the oval */
+    width: 250px;
+    height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    padding: 20px;
+    
+    /* Oval shape and lime border/glow */
+    border: 2px solid var(--accent-lime); 
+    border-radius: 50%; /* Creates the oval shape */
+    box-shadow: 0 0 15px var(--accent-lime); /* Glow effect */
+    
+    /* 3D Properties: Important for making rotateY look right */
+    perspective: 1000px; 
+    transform-style: preserve-3d; /* Fixes border rendering during 3D transform */
+    
+    /* Apply the animation */
+    animation: spin3D 8s linear infinite; 
+    margin: 40px auto 60px auto; /* Spacing */
+}
+
+.logo-text {
+    color: var(--accent-lime);
+    text-transform: uppercase;
+    font-size: 1.2em;
+    letter-spacing: 3px; 
+    backface-visibility: hidden; /* Recommended for 3D spinning text */
+}
+
+/* Keyframe Definition for 3D Spinning */
+@keyframes spin3D {
+    0% {
+        transform: rotateY(0deg); 
+    }
+    100% {
+        transform: rotateY(360deg); 
+    }
+}
+
+/* --- 3. Lime Green Accent (Buttons/Links) --- */
+.link-btn {
+    display: block;
+    width: 100%; /* Fill the container width */
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 18px;
     text-align: center;
-}
-
-.container {
-    width: 100%;
-    max-width: 400px; /* Standard width for mobile view */
-}
-
-h1 {
-    font-size: 1.8em;
-    margin-bottom: 30px;
-    color: var(--neon-green);
-    text-shadow: 0 0 5px var(--neon-green); /* Optional neon effect */
-}
-
-/* Button Styling */
-.button {
-    display: block; /* Make the button full width */
-    padding: 15px 20px;
-    margin: 15px 0;
     text-decoration: none;
-    color: var(--text-color);
-    background-color: transparent;
-    border: 2px solid var(--neon-green);
-    border-radius: 8px;
-    font-size: 1em;
+    text-transform: uppercase;
+    
+    /* Default styling */
+    color: var(--accent-lime);
+    border: 1px solid var(--accent-lime);
+    background-color: rgba(170, 255, 0, 0.1); /* Subtle lime background */
     font-weight: bold;
-    transition: background-color 0.2s;
+    letter-spacing: 1px;
+    
+    transition: all 0.3s ease;
 }
 
-.button:hover, .button:active {
-    background-color: var(--neon-green);
-    color: var(--background);
+.link-btn:hover {
+    background-color: var(--accent-lime);
+    color: var(--dark-bg); /* Dark text on bright background for contrast */
+    box-shadow: 0 0 25px var(--accent-lime); /* Stronger glow on hover */
+    transform: scale(1.03); /* Subtle scale up */
 }
 
+/* Style for the priority link (optional distinct look) */
 .priority-link {
-    background-color: var(--neon-green);
-    color: var(--background); /* Invert colors for the primary link */
+    font-size: 1.1em;
+    padding: 20px;
+    /* Make the priority link slightly more dominant */
+    background-color: rgba(170, 255, 0, 0.25);
+    border-width: 2px;
 }
 
-.profile-image {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 20px;
-    border: 3px solid var(--neon-green);
+/* Footer Information Styling */
+.footer-info {
+    margin-top: 30px;
+    font-size: 0.8em;
+    color: rgba(240, 240, 240, 0.6);
 }
