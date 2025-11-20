@@ -1,0 +1,66 @@
+/* P1 Technical Setup: Setting the Neon Green Color */
+:root {
+    --neon-green: #39FF14; /* Limish Green accent color */
+    --background: #000000;
+    --text-color: #FFFFFF;
+}
+
+/* Base Styles: Mobile First */
+body {
+    background-color: var(--background);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px; /* Standard width for mobile view */
+}
+
+h1 {
+    font-size: 1.8em;
+    margin-bottom: 30px;
+    color: var(--neon-green);
+    text-shadow: 0 0 5px var(--neon-green); /* Optional neon effect */
+}
+
+/* Button Styling */
+.button {
+    display: block; /* Make the button full width */
+    padding: 15px 20px;
+    margin: 15px 0;
+    text-decoration: none;
+    color: var(--text-color);
+    background-color: transparent;
+    border: 2px solid var(--neon-green);
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.button:hover, .button:active {
+    background-color: var(--neon-green);
+    color: var(--background);
+}
+
+.priority-link {
+    background-color: var(--neon-green);
+    color: var(--background); /* Invert colors for the primary link */
+}
+
+.profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 3px solid var(--neon-green);
+}
