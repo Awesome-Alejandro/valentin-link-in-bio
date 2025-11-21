@@ -1,26 +1,27 @@
-/* --- 0. CRITICAL RESET & FIXES --- */
+/* --- 0. CRITICAL RESET --- */
 * {
-    box-sizing: border-box; /* FIX: Prevents padding from making elements wider than 100% */
+    box-sizing: border-box;
 }
 
-html, body {
-    height: 100%; /* Ensures vertical alignment works */
-    width: 100%;  /* Ensures no horizontal overflow */
+html {
+    /* Force the browser to acknowledge the screen width limit */
+    width: 100%;
+    overflow-x: hidden; 
 }
 
-:root {
-    /* Define the core brand accent color (Lime Green) */
-    --accent-lime: #aaff00;
-    
-    /* Variables for the Industrial/Metallic Gradient Background */
-    --dark-bg: #0d0d0d;
-    --mid-grey: #242424;
-    --light-silver: #4d4d4d;
-    --light-text: #f0f0f0; 
-}
-
-/* --- 1. Global Industrial/Techno Base --- */
 body {
+    /* Remove all default spacing */
+    margin: 0;
+    padding: 0;
+    
+    /* CSS GRID: The most robust centering method */
+    display: grid;
+    place-items: center; /* Forces content to dead center */
+    
+    /* ensure it takes full height but doesn't force scroll if not needed */
+    min-height: 100vh; 
+    width: 100%;
+    
     /* Linear Gradient Background */
     background: linear-gradient(180deg, var(--dark-bg) 0%, var(--mid-grey) 45%, var(--light-silver) 75%, var(--dark-bg) 100%);
     background-color: var(--dark-bg);
@@ -28,38 +29,41 @@ body {
 
     color: var(--light-text);
     font-family: 'Roboto Mono', 'Courier New', monospace; 
-    
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Safety net for horizontal scroll */
-    
-    /* FLEXBOX CENTERING */
-    display: flex; 
-    justify-content: center; 
-    align-items: center;     
-    min-height: 100vh; 
 }
 
-/* --- 2. Main Container --- */
+:root {
+    --accent-lime: #aaff00;
+    --dark-bg: #0d0d0d;
+    --mid-grey: #242424;
+    --light-silver: #4d4d4d;
+    --light-text: #f0f0f0; 
+}
+
+/* --- 1. Main Container --- */
 .container {
-    width: 90%;
-    max-width: 500px; 
+    /* Strict width controls */
+    width: 90%; 
+    max-width: 500px;
+    
+    /* Remove margins, let Grid handle the centering */
+    margin: 0; 
     padding: 20px;
     text-align: center; 
     
     background-color: rgba(0, 0, 0, 0.4); 
     border-radius: 8px;
     border: 1px solid rgba(170, 255, 0, 0.2); 
-    z-index: 10; 
     
-    /* Ensure container doesn't overflow screen */
-    margin: 0 auto;
+    /* Fix for ghost overflows */
+    overflow: hidden; 
 }
 
-/* --- 3. Spinning Oval Logo (3D Rotation) --- */
+/* --- 2. Spinning Oval Logo (3D Rotation) --- */
 #logo-container {
     width: 250px;
     height: 80px;
+    
+    /* Flex inside the logo to center text */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,7 +76,7 @@ body {
     transform-style: preserve-3d; 
     animation: spin3D 8s linear infinite; 
     
-    margin: 40px auto 60px auto; /* Centered */
+    margin: 40px auto 60px auto; 
 }
 
 .logo-text {
@@ -81,6 +85,7 @@ body {
     font-size: 1.2em;
     letter-spacing: 3px; 
     backface-visibility: hidden; 
+    white-space: nowrap; /* Prevents text from wrapping and changing width */
 }
 
 @keyframes spin3D {
@@ -88,12 +93,12 @@ body {
     100% { transform: rotateY(360deg); }
 }
 
-/* --- 4. Lime Green Accent (Buttons/Links) --- */
+/* --- 3. Links --- */
 .link-btn {
     display: block;
-    width: 100%; /* Now calculates correctly with border-box */
-    max-width: 400px;
-    margin: 20px auto; 
+    width: 100%; 
+    /* No auto margin needed if width is 100% inside a padded container */
+    margin: 20px 0; 
     padding: 18px;
     
     text-align: center;
@@ -129,10 +134,9 @@ body {
     color: rgba(240, 240, 240, 0.6);
 }
 
-/* --- 5. Mobile Responsiveness --- */
+/* --- 4. Mobile Adjustments --- */
 @media screen and (max-width: 600px) {
     body { font-size: 14px; }
-    .container { padding: 10px; width: 95%; }
     
     #logo-container {
         width: 200px; 
@@ -142,6 +146,6 @@ body {
 
     .logo-text { font-size: 1em; letter-spacing: 2px; }
     
-    .link-btn { padding: 15px; margin: 15px auto; }
+    .link-btn { padding: 15px; margin: 15px 0; }
     .priority-link { padding: 16px; font-size: 1em; }
 }
