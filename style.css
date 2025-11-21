@@ -1,72 +1,78 @@
- :root {
+/* --- 0. CRITICAL RESET & FIXES --- */
+* {
+    box-sizing: border-box; /* FIX: Prevents padding from making elements wider than 100% */
+}
+
+html, body {
+    height: 100%; /* Ensures vertical alignment works */
+    width: 100%;  /* Ensures no horizontal overflow */
+}
+
+:root {
     /* Define the core brand accent color (Lime Green) */
     --accent-lime: #aaff00;
     
     /* Variables for the Industrial/Metallic Gradient Background */
-    --dark-bg: #0d0d0d;       /* Near Black */
-    --mid-grey: #242424;      /* Dark Metal Grey */
-    --light-silver: #4d4d4d;  /* Brushed Silver Highlight */
+    --dark-bg: #0d0d0d;
+    --mid-grey: #242424;
+    --light-silver: #4d4d4d;
     --light-text: #f0f0f0; 
 }
 
-/* --- 1. Global Industrial/Techno Base (Black/Grey/Silver Gradient) --- */
+/* --- 1. Global Industrial/Techno Base --- */
 body {
-    /* Linear Gradient: Vertical transition for industrial/metallic look */
+    /* Linear Gradient Background */
     background: linear-gradient(180deg, var(--dark-bg) 0%, var(--mid-grey) 45%, var(--light-silver) 75%, var(--dark-bg) 100%);
-    
-    /* Ensures the gradient is fixed and covers the entire screen */
     background-color: var(--dark-bg);
     background-attachment: fixed; 
 
     color: var(--light-text);
-    /* Font for the techno/industrial feel */
     font-family: 'Roboto Mono', 'Courier New', monospace; 
     
-    /* CRITICAL ALIGNMENT & OVERFLOW FIXES */
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* <-- NEW: Prevents horizontal scroll/misalignment */
+    overflow-x: hidden; /* Safety net for horizontal scroll */
     
+    /* FLEXBOX CENTERING */
     display: flex; 
-    justify-content: center; /* Horizontally centers content */
-    align-items: center;     /* Vertically centers content */
+    justify-content: center; 
+    align-items: center;     
     min-height: 100vh; 
 }
 
-/* Center the main link container */
+/* --- 2. Main Container --- */
 .container {
     width: 90%;
-    max-width: 500px; /* Standard link-in-bio width */
+    max-width: 500px; 
     padding: 20px;
-    text-align: center; /* Centers inline/text content inside */
-    /* Optional: Slight dark box around the content area */
+    text-align: center; 
+    
     background-color: rgba(0, 0, 0, 0.4); 
     border-radius: 8px;
-    border: 1px solid rgba(170, 255, 0, 0.2); /* Thin lime border */
+    border: 1px solid rgba(170, 255, 0, 0.2); 
     z-index: 10; 
+    
+    /* Ensure container doesn't overflow screen */
+    margin: 0 auto;
 }
 
-/* --- 2. Spinning Oval Logo (3D Rotation) --- */
+/* --- 3. Spinning Oval Logo (3D Rotation) --- */
 #logo-container {
-    /* Dimensions to create the oval */
     width: 250px;
     height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
     
-    /* Oval shape and lime border/glow */
     border: 2px solid var(--accent-lime); 
-    border-radius: 50%; /* Creates the oval shape */
-    box-shadow: 0 0 15px var(--accent-lime); /* Glow effect */
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--accent-lime); 
     
-    /* 3D Properties: Important for making rotateY look right */
     perspective: 1000px; 
     transform-style: preserve-3d; 
-    
-    /* Apply the animation */
     animation: spin3D 8s linear infinite; 
-    margin: 40px auto 60px auto; /* Auto margins ensure horizontal centering */
+    
+    margin: 40px auto 60px auto; /* Centered */
 }
 
 .logo-text {
@@ -77,28 +83,23 @@ body {
     backface-visibility: hidden; 
 }
 
-/* Keyframe Definition for 3D Spinning */
 @keyframes spin3D {
-    0% {
-        transform: rotateY(0deg); 
-    }
-    100% {
-        transform: rotateY(360deg); 
-    }
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
 }
 
-/* --- 3. Lime Green Accent (Buttons/Links) --- */
+/* --- 4. Lime Green Accent (Buttons/Links) --- */
 .link-btn {
     display: block;
-    width: 100%; /* Fill the container width */
+    width: 100%; /* Now calculates correctly with border-box */
     max-width: 400px;
-    margin: 20px auto; /* Auto margins ensure horizontal centering */
+    margin: 20px auto; 
     padding: 18px;
+    
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
     
-    /* Default styling */
     color: var(--accent-lime);
     border: 1px solid var(--accent-lime);
     background-color: rgba(170, 255, 0, 0.1); 
@@ -115,7 +116,6 @@ body {
     transform: scale(1.03); 
 }
 
-/* Style for the priority link (optional distinct look) */
 .priority-link {
     font-size: 1.1em;
     padding: 20px;
@@ -123,45 +123,25 @@ body {
     border-width: 2px;
 }
 
-/* Footer Information Styling */
 .footer-info {
     margin-top: 30px;
     font-size: 0.8em;
     color: rgba(240, 240, 240, 0.6);
 }
 
-/* --- 4. Mobile Responsiveness (Fixing the Mobile View) --- */
+/* --- 5. Mobile Responsiveness --- */
 @media screen and (max-width: 600px) {
+    body { font-size: 14px; }
+    .container { padding: 10px; width: 95%; }
     
-    body {
-        font-size: 14px;
-    }
-
-    .container {
-        padding: 10px;
-        width: 95%;
-    }
-
-    /* Shrink Logo for Mobile */
     #logo-container {
         width: 200px; 
         height: 60px;
         margin: 30px auto 40px auto; 
     }
 
-    .logo-text {
-        font-size: 1em; 
-        letter-spacing: 2px;
-    }
+    .logo-text { font-size: 1em; letter-spacing: 2px; }
     
-    /* Adjust Button Size */
-    .link-btn {
-        padding: 15px;
-        margin: 15px auto;
-    }
-
-    .priority-link {
-        padding: 16px;
-        font-size: 1em;
-    }
+    .link-btn { padding: 15px; margin: 15px auto; }
+    .priority-link { padding: 16px; font-size: 1em; }
 }
